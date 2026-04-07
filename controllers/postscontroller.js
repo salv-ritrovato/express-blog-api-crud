@@ -7,8 +7,12 @@ const allPosts = (req, res) => {
 
 // Show
 const getPost = (req, res) => {
-    const { id } = req.params;
-    res.send(`Dettagli del post ${id}`);
+    const id = Number(req.params.id);
+    const post = posts.find(item => item.id === id);
+    if (!post) {
+        return res.status(404).json({ message: "Post inesistente" })
+    }
+    res.json(post);
 };
 
 // Create
