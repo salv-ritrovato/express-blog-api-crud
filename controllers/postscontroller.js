@@ -28,8 +28,14 @@ const updatePost = (req, res) => {
 
 // Delete
 const deletePost = (req, res) => {
-    const { id } = req.params;
-    res.send(`Cancellazione del post ${id}`);
+    const id = Number(req.params.id);
+    const index = posts.findIndex(item => item.id === id);
+    if (index === -1) {
+        return res.status(404).json({ message: "Post inesistente" })
+    }
+    posts.splice(index, 1);
+    res.json({ message: "Post rimosso con successo" })
+    res.status(204).send();
 };
 
 module.exports = { allPosts, getPost, createPost, updatePost, deletePost };
