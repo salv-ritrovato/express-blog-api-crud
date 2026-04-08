@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
+// Body parser
+app.use(express.json());
+
 // Import posts.js
 const postsRouter = require('./routes/posts');
 

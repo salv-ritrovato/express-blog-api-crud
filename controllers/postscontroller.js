@@ -35,7 +35,6 @@ const deletePost = (req, res) => {
     }
     posts.splice(index, 1);
     res.json({ message: "Post rimosso con successo" })
-    res.status(204).send();
 };
 
 module.exports = { allPosts, getPost, createPost, updatePost, deletePost };
