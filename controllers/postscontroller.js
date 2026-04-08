@@ -17,13 +17,21 @@ const getPost = (req, res) => {
 
 // Create
 const createPost = (req, res) => {
-    res.send('Creazione di un nuovo post');
+    const { titolo, contenuto, immagine, tags } = req.body;
+    const newPost = { id: Date.now(), titolo, contenuto, immagine, tags };
+    posts.push(newPost);
+    res.status(201).json({ message: "Post creato con successo!", post: newPost });
 };
 
 // Update
 const updatePost = (req, res) => {
-    const { id } = req.params;
-    res.send(`Aggiornamento del post ${id}`);
+    const id = Number(req.params.id);
+    const index = posts.findIndex(item => item.id === id);
+    if (index === -1) {
+        return res.status(404).json({ message: "Post inesistente" });
+    }
+    posts[index] = { ...posts[index], ...req.body };
+    res.json({ message: "Post aggiornato con successo!", post: posts[index] });
 };
 
 // Delete
