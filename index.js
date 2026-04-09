@@ -9,6 +9,9 @@ app.use(express.json());
 // Import posts.js
 const postsRouter = require('./routes/posts');
 
+// Import Not Found error
+const notFound = require("./middlewares/notfound");
+
 // Serves static files from 'public' at '/static'
 app.use('/static', express.static('public'));
 
@@ -19,6 +22,9 @@ app.get('/', (req, res) => {
 
 // Posts
 app.use('/posts', postsRouter);
+
+// notFound
+app.use(notFound);
 
 // Start the server on PORT
 app.listen(PORT, () => {
