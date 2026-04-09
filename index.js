@@ -12,6 +12,9 @@ const postsRouter = require('./routes/posts');
 // Import Not Found error
 const notFound = require("./middlewares/notfound");
 
+// Import Error Handler
+const errorHandler = require("./middlewares/errorhandler")
+
 // Serves static files from 'public' at '/static'
 app.use('/static', express.static('public'));
 
@@ -25,6 +28,9 @@ app.use('/posts', postsRouter);
 
 // notFound
 app.use(notFound);
+
+// errorHandler
+app.use(errorHandler);
 
 // Start the server on PORT
 app.listen(PORT, () => {
